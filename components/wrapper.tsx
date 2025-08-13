@@ -56,7 +56,7 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
           >
             Sneaker Hub
             <span className="name group mt-0 rounded-3xl bg-[#fafafa] px-3 text-sm font-bold text-black">
-              Your sneakers' safe space
+              Your sneakers&apos safe space
             </span>
           </Link>
           {/* Theme toggle visible on all sizes, header is fixed */}
