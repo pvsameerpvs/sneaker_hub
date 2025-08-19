@@ -27,53 +27,59 @@ export default function Home() {
 
   return (
     <section className="flex flex-col lg:flex-row">
-      {/* LEFT: content over background */}
+      {/* LEFT: background + content */}
       <section
-        className="flex min-h-screen w-full flex-col justify-between p-9 lg:h-auto"
+        className="relative w-full overflow-hidden"
         style={{
+          height: "100svh",
           backgroundImage: `url(${page2.src})`,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       >
+        {/* Overlay for readability */}
+        <div className="absolute inset-0 bg-black/30" aria-hidden />
+
+        {/* Keep Wrapper (header + footer) */}
         <Wrapper>
-          <div className="mx-auto w-full max-w-sm">
-            {/* Stepper */}
-            <ol className="relative pl-8" aria-label="How it works">
-              {/* vertical rail (kept green, respects theme) */}
-              <span
-                aria-hidden
-                className="absolute top-3 bottom-3 left-3 w-[2px] bg-green-500"
-              />
+          {/* Content area fits exactly between header+footer; no scroll */}
+          <main className="relative z-10 grid min-h-[calc(100svh-11rem)] place-items-center p-4">
+            <div className="mx-auto w-full max-w-sm">
+              <ol className="relative pl-7" aria-label="How it works">
+                {/* Rail */}
+                <span
+                  aria-hidden
+                  className="absolute top-3 bottom-3 left-2.5 w-[2px] bg-green-500/90"
+                />
+                {steps.map((step, idx) => (
+                  <li key={idx} className="relative mb-4 last:mb-0">
+                    {/* Index */}
+                    <span className="absolute top-1 left-0 flex h-5 w-5 items-center justify-center rounded-full border border-green-500 bg-white text-[10px] font-bold text-green-600 shadow-sm dark:bg-black">
+                      {idx + 1}
+                    </span>
 
-              {steps.map((step, idx) => (
-                <li key={idx} className="relative mb-6 last:mb-0">
-                  {/* step index */}
-                  <span className="absolute top-1 left-0 flex h-6 w-6 items-center justify-center rounded-full border-2 border-green-500 bg-white text-xs font-bold text-green-500 dark:bg-black">
-                    {idx + 1}
-                  </span>
-
-                  {/* card */}
-                  <div className="rounded-lg bg-white/30 p-3 shadow-md backdrop-blur-sm dark:bg-black/40">
-                    <h3 className="mb-1 text-sm font-bold text-black dark:text-white">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs font-medium text-black dark:text-gray-300">
-                      {step.description}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
+                    {/* Card */}
+                    <div className="rounded-lg border border-white/20 bg-white/25 p-3 shadow-md backdrop-blur-md dark:border-white/10 dark:bg-black/35">
+                      <h3 className="mb-0.5 text-xs font-semibold tracking-tight text-black dark:text-white">
+                        {step.title}
+                      </h3>
+                      <p className="text-[11px] leading-snug font-medium text-black/85 dark:text-gray-200">
+                        {step.description}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </main>
         </Wrapper>
       </section>
 
-      {/* RIGHT: illustration */}
-      <section className="hidden min-h-screen w-full flex-col items-center justify-center bg-[#e0f5ff] p-9 lg:flex">
+      {/* RIGHT: illustration (kept as original, disabled) */}
+      {/* <section className="hidden min-h-screen w-full flex-col items-center justify-center bg-[#e0f5ff] p-9 lg:flex">
         <Image src={manWIthRobot} alt="Man with robot illustration" />
-      </section>
+      </section> */}
     </section>
   );
 }

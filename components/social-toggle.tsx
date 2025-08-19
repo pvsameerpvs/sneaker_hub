@@ -26,7 +26,7 @@ export default function SocialToggle() {
 
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/yourphonenumber"
+        href="https://wa.me/971501335322"
         target="_blank"
         rel="noopener noreferrer"
         className="p-1 text-zinc-700 hover:text-green-600 dark:text-zinc-500 dark:hover:text-green-500"

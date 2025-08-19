@@ -1,4 +1,5 @@
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 
 import localFont from "next/font/local";
 import type { Metadata } from "next/types";
@@ -31,52 +32,93 @@ const spaceMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sneaker Hub",
+  // ── Core
+  title: {
+    default: "Sneaker Hub",
+    template: "%s | Sneaker Hub",
+  },
+  description:
+    "Sneaker Hub – premium sneaker cleaning, restoration, and pickup service in Dubai, UAE. Schedule a doorstep pickup and get your shoes professionally cleaned and protected.",
+  keywords: [
+    "Sneaker cleaning",
+    "Shoe laundry",
+    "Sneaker restoration",
+    "Shoe pickup service",
+    "Dubai",
+    "UAE",
+    "Sole whitening",
+    "Stain removal",
+    "Waterproof coating",
+    "Sneaker Hub",
+    "Kaminari",
+    "Next.js",
+    "React",
+    "shadcn-ui",
+  ],
+
+  // ── Attribution (kept)
   generator: "Next.js",
   applicationName: "Kaminari",
   referrer: "origin-when-cross-origin",
-  keywords: [
-    "Next.js",
-    "React",
-    "JavaScript",
-    "Boilerplate",
-    "Template",
-    "shadcn-ui",
-  ],
   authors: [{ name: "Virgil", url: "https://obedd.vercel.app" }],
   creator: "Virgil",
   publisher: "Virgil",
-  alternates: {},
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
+
+  // ── Crawling
+  robots: { index: true },
+
+  // ── Canonical (replace with your real domain when ready)
+  alternates: {
+    canonical: "https://kaminari.vercel.app",
   },
+
+  // ── Base URL (keep or change to your real prod domain)
   metadataBase: new URL("https://kaminari.vercel.app"),
+
+  // ── Mobile parsing
+  formatDetection: { email: false, address: false, telephone: false },
+
+  // ── Open Graph
   openGraph: {
-    title: "Kaminari",
-    description: "Next.js, TailwindCSS and shadcn-ui Starter Template",
+    title: "Sneaker Hub",
+    description:
+      "Doorstep sneaker pickup & professional cleaning in Dubai, UAE. Book in seconds.",
     url: "https://kaminari.vercel.app",
-    siteName: "Kaminari",
+    siteName: "Sneaker Hub",
     images: [
-      {
-        url: "https://kaminari.vercel.app/og.png",
-        width: 800,
-        height: 600,
-      },
+      { url: "https://kaminari.vercel.app/og.png", width: 800, height: 600 },
       {
         url: "https://kaminari.vercel.app/og-dark.png",
         width: 1800,
         height: 1600,
-        alt: "Next.js, TailwindCSS and shadcn-ui Starter Template",
+        alt: "Sneaker Hub – premium sneaker cleaning & pickup",
       },
     ],
-    locale: "en-US",
+    locale: "en_US",
     type: "website",
   },
-  robots: {
-    index: true,
+
+  // ── Twitter Card
+  twitter: {
+    card: "summary_large_image",
+    title: "Sneaker Hub",
+    description:
+      "Premium sneaker cleaning & pickup in Dubai. Book your doorstep pickup now.",
+    images: ["https://kaminari.vercel.app/og.png"],
   },
+
+  // ── Icons / theme color (optional; safe to keep)
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  themeColor: "#111111",
 };
 
 export default function RootLayout({

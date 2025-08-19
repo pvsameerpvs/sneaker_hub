@@ -5,11 +5,13 @@ import { useTheme } from "next-themes";
 
 import { Icons } from "@/components/icons";
 
+import { Button } from "./ui/button";
+
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
-    <div className="flex w-max flex-col items-center space-y-2 rounded-full border bg-[#fafafa] p-2 shadow dark:border-zinc-800 dark:bg-[#111]">
-      <button
+    <div className="flex w-max flex-row items-center space-x-2 rounded-full border bg-[#fafafa] p-2 shadow dark:border-zinc-800 dark:bg-[#111]">
+      <Button
         className={`p-1 text-zinc-700 dark:text-zinc-500 ${
           theme === "system"
             ? "rounded-full bg-white text-zinc-50 shadow-xl dark:bg-[#333]"
@@ -18,7 +20,7 @@ export default function ThemeToggle() {
         onClick={() => setTheme("system")}
       >
         <Icons.monitor classes="" />
-      </button>
+      </Button>
       <button
         className={`p-1 text-zinc-700 dark:text-zinc-500 ${
           theme === "dark"

@@ -1,16 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import darkLogo from "@/public/sneaker-logos-dark-mode.png";
+import lightLogo from "@/public/sneaker-logos-light-mode.png";
 
 import SchedulePickupModal from "./schedule-pickup-modal";
 import SocialToggle from "./social-toggle";
 import ThemeToggle from "./theme-toggle";
 import { Button } from "./ui/button";
 
-// Heights used for spacing the scrollable content area
-// Header: h-20 => 5rem, Footer: h-24 => 6rem
+// Header / Footer heights in rem
 const HEADER_REM = 5;
 const FOOTER_REM = 6;
 
@@ -30,7 +32,6 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Derive next / previous based on the current path
   useEffect(() => {
     const activeIdx = SECTION_DATA.findIndex((s) => s.href === pathname);
     const idx = activeIdx === -1 ? 0 : activeIdx;
@@ -42,25 +43,36 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
     );
   }, [pathname]);
 
-  const activeSection =
-    SECTION_DATA.find((s) => s.href === pathname) ?? SECTION_DATA[0];
-
   return (
     <div className="bg-background text-foreground relative min-h-screen">
       {/* FIXED HEADER */}
       <header className="fixed inset-x-0 top-0 z-50 h-20 border-b bg-white/80 backdrop-blur dark:bg-zinc-900/70">
-        <div className="mx-auto flex h-full max-w-5xl items-center justify-between px-4">
+        <div className="mx-auto flex h-full max-w-5xl items-center justify-between px-2">
           <Link
             href="/"
-            className="flex flex-col items-start text-2xl font-bold dark:text-white"
+            className="flex items-center gap-3"
+            aria-label="Sneaker Hub home"
           >
-            Sneaker Hub
-            <span className="name group mt-0 rounded-3xl bg-[#fafafa] px-3 text-sm font-bold text-black">
-              Your sneakers&apos safe space
-            </span>
+            {/* Light mode */}
+            <Image
+              src={lightLogo}
+              alt="Sneaker Hub"
+              priority
+              unoptimized
+              className="h-17 w-70 dark:hidden"
+            />
+            {/* Dark mode */}
+            <Image
+              src={darkLogo}
+              alt="Sneaker Hub"
+              priority
+              unoptimized
+              className="hidden h-17 w-70 dark:block"
+            />
           </Link>
-          {/* Theme toggle visible on all sizes, header is fixed */}
-          <div className="absolute top-24 right-4">
+
+          {/* Put the theme toggle in the header row so it doesn't overflow below */}
+          <div className="relative right-0 -bottom-18 z-10 flex items-center gap-2">
             <ThemeToggle />
           </div>
         </div>
@@ -74,8 +86,6 @@ export default function Wrapper({ children }: { children: React.ReactNode }) {
           paddingBottom: `${FOOTER_REM}rem`,
         }}
       >
-        {/* The inner container ensures vertical centering when content is short,
-            and allows scrolling when content is tall. */}
         <div className="min-h-[calc(100vh-5rem-6rem)] overflow-y-auto">
           <div className="flex min-h-[inherit] items-center justify-center py-6">
             {children}
